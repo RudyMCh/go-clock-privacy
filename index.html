@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Politique de Confidentialité – Go-Clock</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@300;400;500&display=swap"
+    rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0d0f14;
+      --surface: #151820;
+      --border: #1e2330;
+      --accent: #4f9cf9;
+      --accent-dim: rgba(79, 156, 249, 0.12);
+      --text: #e8eaf0;
+      --muted: #7a8099;
+      --heading-font: 'DM Serif Display', serif;
+      --body-font: 'DM Sans', sans-serif;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--body-font);
+      font-weight: 300;
+      line-height: 1.75;
+      min-height: 100vh;
+    }
+
+    /* Subtle grid background */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(79, 156, 249, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(79, 156, 249, 0.03) 1px, transparent 1px);
+      background-size: 40px 40px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .wrapper {
+      position: relative;
+      z-index: 1;
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 80px 24px 100px;
+    }
+
+    /* Header */
+    header {
+      margin-bottom: 64px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 40px;
+    }
+
+    .app-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--accent-dim);
+      border: 1px solid rgba(79, 156, 249, 0.25);
+      border-radius: 100px;
+      padding: 6px 16px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--accent);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin-bottom: 28px;
+    }
+
+    .app-badge::before {
+      content: '';
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--accent);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        opacity: 1;
+      }
+
+      50% {
+        opacity: 0.3;
+      }
+    }
+
+    h1 {
+      font-family: var(--heading-font);
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 400;
+      line-height: 1.15;
+      letter-spacing: -0.01em;
+      color: #fff;
+      margin-bottom: 16px;
+    }
+
+    .subtitle {
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .subtitle span {
+      color: var(--accent);
+    }
+
+    /* Sections */
+    .section {
+      margin-bottom: 40px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 32px;
+      transition: border-color 0.2s;
+    }
+
+    .section:hover {
+      border-color: rgba(79, 156, 249, 0.2);
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 16px;
+    }
+
+    .icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: var(--accent-dim);
+      border: 1px solid rgba(79, 156, 249, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      flex-shrink: 0;
+    }
+
+    h2 {
+      font-family: var(--heading-font);
+      font-size: 1.2rem;
+      font-weight: 400;
+      color: #fff;
+    }
+
+    p {
+      color: #adb5cc;
+      font-size: 15px;
+    }
+
+    /* Highlight box */
+    .highlight {
+      background: var(--accent-dim);
+      border: 1px solid rgba(79, 156, 249, 0.25);
+      border-radius: 12px;
+      padding: 20px 24px;
+      margin-top: 16px;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .highlight-icon {
+      font-size: 20px;
+      margin-top: 1px;
+      flex-shrink: 0;
+    }
+
+    .highlight p {
+      color: #c5d5f0;
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    /* Contact */
+    .contact-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--accent);
+      text-decoration: none;
+      font-size: 15px;
+      font-weight: 500;
+      margin-top: 12px;
+      padding: 8px 16px;
+      background: var(--accent-dim);
+      border: 1px solid rgba(79, 156, 249, 0.25);
+      border-radius: 8px;
+      transition: all 0.2s;
+    }
+
+    .contact-link:hover {
+      background: rgba(79, 156, 249, 0.2);
+    }
+
+    /* Date */
+    .date-tag {
+      display: inline-block;
+      font-size: 12px;
+      color: var(--muted);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 4px 10px;
+      margin-top: 8px;
+    }
+
+    /* Footer */
+    footer {
+      margin-top: 60px;
+      padding-top: 32px;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    footer strong {
+      color: var(--text);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrapper">
+
+    <header>
+      <div class="app-badge">Go-Clock</div>
+      <h1>Politique de<br />Confidentialité</h1>
+      <p class="subtitle">
+        Dernière mise à jour : <span>12 mars 2026</span>
+      </p>
+    </header>
+
+    <div class="section">
+      <div class="section-header">
+        <div class="icon">🔒</div>
+        <h2>Collecte de données</h2>
+      </div>
+      <p>L'application <strong>Go-Clock</strong> ne collecte aucune donnée personnelle. Aucune information vous
+        concernant n'est enregistrée, transmise ou partagée.</p>
+      <div class="highlight">
+        <span class="highlight-icon">✅</span>
+        <p>Go-Clock fonctionne entièrement hors ligne et en local sur votre appareil. Aucune donnée ne quitte votre
+          téléphone.</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-header">
+        <div class="icon">👤</div>
+        <h2>Données personnelles</h2>
+      </div>
+      <p>Nous ne collectons pas : nom, adresse e-mail, numéro de téléphone, localisation, identifiants publicitaires, ou
+        toute autre information personnelle.</p>
+    </div>
+
+    <div class="section">
+      <div class="section-header">
+        <div class="icon">🔗</div>
+        <h2>Services tiers</h2>
+      </div>
+      <p>Go-Clock n'intègre aucun service tiers, aucun outil d'analyse, aucune publicité et aucun SDK de suivi. Votre
+        utilisation de l'application reste entièrement privée.</p>
+    </div>
+
+    <div class="section">
+      <div class="section-header">
+        <div class="icon">👶</div>
+        <h2>Enfants</h2>
+      </div>
+      <p>Go-Clock ne collecte aucune donnée, y compris pour les utilisateurs de moins de 13 ans. L'application est sûre
+        pour tous les âges.</p>
+    </div>
+
+    <div class="section">
+      <div class="section-header">
+        <div class="icon">📬</div>
+        <h2>Contact</h2>
+      </div>
+      <p>Pour toute question relative à cette politique de confidentialité, vous pouvez nous contacter à l'adresse
+        suivante :</p>
+      <br />
+      <p style="color: var(--muted); font-size: 13px;">Remplacez cette adresse par la vôtre :</p>
+      <a href="mailto:votre@email.com" class="contact-link">
+        ✉️ votre@email.com
+      </a>
+    </div>
+
+    <div class="section">
+      <div class="section-header">
+        <div class="icon">🔄</div>
+        <h2>Modifications</h2>
+      </div>
+      <p>Cette politique peut être mise à jour occasionnellement. Toute modification sera reflétée sur cette page avec
+        une nouvelle date de mise à jour.</p>
+      <div class="date-tag">Version 1.0 — 12 mars 2026</div>
+    </div>
+
+    <footer>
+      <p><strong>Go-Clock</strong> — Application Android</p>
+      <p style="margin-top: 6px;">© 2026 — Tous droits réservés</p>
+    </footer>
+
+  </div>
+</body>
+
+</html>
